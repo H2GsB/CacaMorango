@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caça ao Morango em RA</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
+        .ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 20px;
+        }
+        .hidden { display: none; }
+        .button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui">
+        <p>Tempo restante: <span id="tempo">08:00</span></p>
+        <p>Morangos coletados: <span id="score">0</span></p>
+    </div>
+    
+    <a-scene embedded arjs="trackingMethod: best;">
+        <a-marker preset="hiro">
+            <a-entity id="morango" geometry="primitive: sphere; radius: 0.2" material="color: red" position="0 0.5 0" visible="false"></a-entity>
+
+            <!-- Obstáculos para esconder o morango -->
+            <a-entity geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5" material="color: grey" position="0 0.25 0.5"></a-entity>
+            <a-entity geometry="primitive: box; width: 0.4; height: 0.4; depth: 0.4" material="color: blue" position="-0.5 0.2 -0.5"></a-entity>
+            <a-entity geometry="primitive: box; width: 0.6; height: 0.6; depth: 0.6" material="color: green" position="0.5 0.3 -0.7"></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <button id="startBtn" class="button">Começar o Jogo</button>
+
+    <script src="game.js"></script>
+</body>
+</html>
